@@ -10,3 +10,4 @@
 !.gitignore
 !init.sh
 /fceux-am
+!./nemu/README_z.md
