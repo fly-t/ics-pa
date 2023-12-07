@@ -1,3 +1,4 @@
+# test
 #!/bin/bash
 
 # usage: addenv env_name path
