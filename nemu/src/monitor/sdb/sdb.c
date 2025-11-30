@@ -52,6 +52,25 @@ static int cmd_q(char *args) {
   return -1;
 }
 
+static int cmd_si(char *args) {
+  int n = 0;
+  if (args == NULL) {
+    n = 1; // Default to 1 step if no argument is given
+  } else {
+    // Attempt to parse the argument as an integer
+    char *endptr;
+    long val = strtol(args, &endptr, 10);
+    if (*endptr == '\0' && val > 0) {
+      n = (int)val;
+    } else {
+      printf("Error: Invalid argument for 'si' command. Please provide a positive integer.\n");
+      return 0; // Don't exit SDB, just return
+    }
+  }
+  cpu_exec(n);
+  return 0;
+}
+
 static int cmd_help(char *args);
 
 static struct {
@@ -62,6 +81,7 @@ static struct {
   { "help", "Display information about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
+  { "si", "Execute N instructions (N defaults to 1)", cmd_si },
 
   /* TODO: Add more commands */
 
